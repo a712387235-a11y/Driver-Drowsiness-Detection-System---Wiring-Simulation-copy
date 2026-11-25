@@ -1,0 +1,704 @@
+{
+  "version": 1,
+  "name": "Driver Drowsiness Detection System - Wiring Simulation copy",
+  "parts": [
+    {
+      "id": "esp32s3cam1",
+      "type": "esp32s3cam",
+      "props": {},
+      "x": 80,
+      "y": 80,
+      "rot": 0
+    },
+    {
+      "id": "vehicle_supply",
+      "type": "psu",
+      "props": {
+        "voltage": 12,
+        "limit": 2,
+        "output": true
+      },
+      "x": 560,
+      "y": 80,
+      "rot": 0
+    },
+    {
+      "id": "buck_5v",
+      "type": "lm2596",
+      "props": {
+        "volts": 5
+      },
+      "x": 900,
+      "y": 80,
+      "rot": 0
+    },
+    {
+      "id": "buzzer",
+      "type": "buzzer",
+      "props": {},
+      "x": 1200,
+      "y": 80,
+      "rot": 0
+    },
+    {
+      "id": "buzzer_npn",
+      "type": "transistor",
+      "props": {
+        "model": "2N2222",
+        "legs": "schematic"
+      },
+      "x": 1360,
+      "y": 80,
+      "rot": 0
+    },
+    {
+      "id": "r_base",
+      "type": "resistor",
+      "props": {
+        "value": 1000
+      },
+      "x": 560,
+      "y": 360,
+      "rot": 0
+    },
+    {
+      "id": "r_base_pd",
+      "type": "resistor",
+      "props": {
+        "value": 10000
+      },
+      "x": 720,
+      "y": 360,
+      "rot": 0
+    },
+    {
+      "id": "rear_mosfet",
+      "type": "mosfet",
+      "props": {
+        "model": "IRLB8721",
+        "legs": "schematic"
+      },
+      "x": 1060,
+      "y": 360,
+      "rot": 0
+    },
+    {
+      "id": "r_gate",
+      "type": "resistor",
+      "props": {
+        "value": 100
+      },
+      "x": 560,
+      "y": 620,
+      "rot": 0
+    },
+    {
+      "id": "r_gate_pd",
+      "type": "resistor",
+      "props": {
+        "value": 10000
+      },
+      "x": 720,
+      "y": 620,
+      "rot": 0
+    },
+    {
+      "id": "status_led",
+      "type": "led",
+      "props": {
+        "color": "green"
+      },
+      "x": 560,
+      "y": 760,
+      "rot": 0
+    },
+    {
+      "id": "r_led",
+      "type": "resistor",
+      "props": {
+        "value": 330
+      },
+      "x": 700,
+      "y": 760,
+      "rot": 0
+    },
+    {
+      "id": "rear_led",
+      "type": "led",
+      "props": {
+        "color": "red"
+      },
+      "x": 880,
+      "y": 360,
+      "rot": 0
+    },
+    {
+      "id": "r_rear_led",
+      "type": "resistor",
+      "props": {
+        "value": 220
+      },
+      "x": 760,
+      "y": 360,
+      "rot": 90
+    },
+    {
+      "id": "bb1",
+      "type": "breadboard",
+      "props": {},
+      "x": 40,
+      "y": 820,
+      "rot": 0
+    }
+  ],
+  "wires": [
+    {
+      "id": "w1",
+      "from": "vehicle_supply:V+",
+      "to": "buck_5v:IN+",
+      "color": "#e14b4b",
+      "bends": [
+        {
+          "x": 740,
+          "y": 280
+        },
+        {
+          "x": 880,
+          "y": 280
+        },
+        {
+          "x": 880,
+          "y": 120
+        }
+      ]
+    },
+    {
+      "id": "w2",
+      "from": "vehicle_supply:V-",
+      "to": "buck_5v:IN-",
+      "color": "#7a8290",
+      "bends": [
+        {
+          "x": 780,
+          "y": 320
+        },
+        {
+          "x": 840,
+          "y": 320
+        },
+        {
+          "x": 840,
+          "y": 160
+        }
+      ]
+    },
+    {
+      "id": "w5",
+      "from": "buck_5v:OUT+",
+      "to": "bb1:tp1",
+      "color": "#e14b4b",
+      "bends": [
+        {
+          "x": 1140,
+          "y": 120
+        },
+        {
+          "x": 1140,
+          "y": 80
+        },
+        {
+          "x": 1300,
+          "y": 80
+        },
+        {
+          "x": 1300,
+          "y": 620
+        },
+        {
+          "x": 80,
+          "y": 620
+        }
+      ]
+    },
+    {
+      "id": "w6",
+      "from": "bb1:tp3",
+      "to": "buzzer:1",
+      "color": "#e14b4b",
+      "bends": [
+        {
+          "x": 120,
+          "y": 820
+        },
+        {
+          "x": 1220,
+          "y": 820
+        }
+      ]
+    },
+    {
+      "id": "w7",
+      "from": "buzzer:2",
+      "to": "buzzer_npn:C",
+      "color": "#7a8290",
+      "bends": [
+        {
+          "x": 1240,
+          "y": 220
+        },
+        {
+          "x": 1400,
+          "y": 220
+        }
+      ]
+    },
+    {
+      "id": "w8",
+      "from": "esp32s3cam1:1",
+      "to": "bb1:a9",
+      "color": "#2f6fed",
+      "bends": [
+        {
+          "x": 360,
+          "y": 180
+        },
+        {
+          "x": 360,
+          "y": 1140
+        },
+        {
+          "x": 220,
+          "y": 1140
+        }
+      ]
+    },
+    {
+      "id": "w9",
+      "from": "r_base:2",
+      "to": "buzzer_npn:B",
+      "color": "#2f6fed",
+      "bends": [
+        {
+          "x": 660,
+          "y": 380
+        },
+        {
+          "x": 660,
+          "y": 560
+        },
+        {
+          "x": 1420,
+          "y": 560
+        }
+      ]
+    },
+    {
+      "id": "w10",
+      "from": "buzzer_npn:B",
+      "to": "r_base_pd:1",
+      "color": "#7a8290",
+      "bends": [
+        {
+          "x": 1420,
+          "y": 280
+        },
+        {
+          "x": 700,
+          "y": 280
+        },
+        {
+          "x": 700,
+          "y": 380
+        }
+      ]
+    },
+    {
+      "id": "w11",
+      "from": "esp32s3cam1:21",
+      "to": "bb1:a20",
+      "color": "#1f9d55",
+      "bends": [
+        {
+          "x": 440,
+          "y": 460
+        }
+      ]
+    },
+    {
+      "id": "w12",
+      "from": "r_led:2",
+      "to": "bb1:a21",
+      "color": "#1f9d55",
+      "bends": [
+        {
+          "x": 800,
+          "y": 780
+        },
+        {
+          "x": 800,
+          "y": 1140
+        },
+        {
+          "x": 460,
+          "y": 1140
+        }
+      ]
+    },
+    {
+      "id": "w13",
+      "from": "esp32s3cam1:47",
+      "to": "bb1:a30",
+      "color": "#2f6fed",
+      "bends": [
+        {
+          "x": 400,
+          "y": 440
+        },
+        {
+          "x": 400,
+          "y": 1220
+        },
+        {
+          "x": 640,
+          "y": 1220
+        }
+      ]
+    },
+    {
+      "id": "w14",
+      "from": "r_gate:2",
+      "to": "bb1:a31",
+      "color": "#2f6fed",
+      "bends": [
+        {
+          "x": 660,
+          "y": 640
+        },
+        {
+          "x": 660,
+          "y": 760
+        },
+        {
+          "x": 860,
+          "y": 760
+        },
+        {
+          "x": 860,
+          "y": 1220
+        },
+        {
+          "x": 660,
+          "y": 1220
+        }
+      ]
+    },
+    {
+      "id": "w15",
+      "from": "rear_mosfet:G",
+      "to": "r_gate_pd:1",
+      "color": "#7a8290",
+      "bends": [
+        {
+          "x": 1120,
+          "y": 520
+        },
+        {
+          "x": 700,
+          "y": 520
+        },
+        {
+          "x": 700,
+          "y": 640
+        }
+      ]
+    },
+    {
+      "id": "g1",
+      "from": "esp32s3cam1:G",
+      "to": "bb1:tn1",
+      "color": "#111111",
+      "bends": [
+        {
+          "x": 120,
+          "y": 560
+        },
+        {
+          "x": 80,
+          "y": 560
+        }
+      ]
+    },
+    {
+      "id": "g2",
+      "from": "buck_5v:OUT-",
+      "to": "bb1:tn2",
+      "color": "#111111",
+      "bends": [
+        {
+          "x": 1180,
+          "y": 160
+        },
+        {
+          "x": 1180,
+          "y": 720
+        },
+        {
+          "x": 100,
+          "y": 720
+        }
+      ]
+    },
+    {
+      "id": "g3",
+      "from": "buzzer_npn:E",
+      "to": "bb1:tn3",
+      "color": "#111111",
+      "bends": [
+        {
+          "x": 1440,
+          "y": 960
+        },
+        {
+          "x": 120,
+          "y": 960
+        }
+      ]
+    },
+    {
+      "id": "g4",
+      "from": "r_base_pd:2",
+      "to": "bb1:tn4",
+      "color": "#111111",
+      "bends": [
+        {
+          "x": 820,
+          "y": 380
+        },
+        {
+          "x": 820,
+          "y": 680
+        },
+        {
+          "x": 140,
+          "y": 680
+        }
+      ]
+    },
+    {
+      "id": "g5",
+      "from": "rear_mosfet:S",
+      "to": "bb1:tn5",
+      "color": "#111111",
+      "bends": [
+        {
+          "x": 1140,
+          "y": 920
+        },
+        {
+          "x": 160,
+          "y": 920
+        }
+      ]
+    },
+    {
+      "id": "g6",
+      "from": "r_gate_pd:2",
+      "to": "bb1:tn6",
+      "color": "#111111",
+      "bends": [
+        {
+          "x": 860,
+          "y": 640
+        },
+        {
+          "x": 860,
+          "y": 680
+        },
+        {
+          "x": 200,
+          "y": 680
+        }
+      ]
+    },
+    {
+      "id": "g7",
+      "from": "status_led:C",
+      "to": "bb1:tn7",
+      "color": "#111111",
+      "bends": [
+        {
+          "x": 600,
+          "y": 880
+        },
+        {
+          "x": 220,
+          "y": 880
+        }
+      ]
+    },
+    {
+      "id": "w16",
+      "from": "bb1:tp4",
+      "to": "r_rear_led:1",
+      "color": "#e14b4b",
+      "bends": [
+        {
+          "x": 140,
+          "y": 780
+        },
+        {
+          "x": 320,
+          "y": 780
+        },
+        {
+          "x": 320,
+          "y": 320
+        },
+        {
+          "x": 800,
+          "y": 320
+        }
+      ]
+    },
+    {
+      "id": "w17",
+      "from": "r_rear_led:2",
+      "to": "rear_led:A",
+      "color": "#e14b4b",
+      "bends": [
+        {
+          "x": 800,
+          "y": 440
+        },
+        {
+          "x": 900,
+          "y": 440
+        }
+      ]
+    },
+    {
+      "id": "w18",
+      "from": "rear_led:C",
+      "to": "rear_mosfet:D",
+      "color": "#7a8290",
+      "bends": [
+        {
+          "x": 920,
+          "y": 480
+        },
+        {
+          "x": 1100,
+          "y": 480
+        }
+      ]
+    },
+    {
+      "id": "w19",
+      "from": "bb1:e9",
+      "to": "r_base:1",
+      "color": "#2f6fed",
+      "bends": [
+        {
+          "x": 500,
+          "y": 800
+        },
+        {
+          "x": 500,
+          "y": 380
+        }
+      ]
+    },
+    {
+      "id": "w20",
+      "from": "bb1:e20",
+      "to": "r_led:1",
+      "color": "#1f9d55",
+      "bends": [
+        {
+          "x": 440,
+          "y": 1060
+        },
+        {
+          "x": 680,
+          "y": 1060
+        },
+        {
+          "x": 680,
+          "y": 780
+        }
+      ]
+    },
+    {
+      "id": "w21",
+      "from": "bb1:e21",
+      "to": "status_led:A",
+      "color": "#1f9d55",
+      "bends": [
+        {
+          "x": 460,
+          "y": 1000
+        },
+        {
+          "x": 580,
+          "y": 1000
+        }
+      ]
+    },
+    {
+      "id": "w22",
+      "from": "bb1:e30",
+      "to": "r_gate:1",
+      "color": "#2f6fed",
+      "bends": [
+        {
+          "x": 640,
+          "y": 1100
+        },
+        {
+          "x": 540,
+          "y": 1100
+        },
+        {
+          "x": 540,
+          "y": 640
+        }
+      ]
+    },
+    {
+      "id": "w23",
+      "from": "bb1:e31",
+      "to": "rear_mosfet:G",
+      "color": "#2f6fed",
+      "bends": [
+        {
+          "x": 1120,
+          "y": 1040
+        }
+      ]
+    },
+    {
+      "id": "w24",
+      "from": "bb1:tp2",
+      "to": "esp32s3cam1:5V",
+      "color": "#e14b4b",
+      "bends": [
+        {
+          "x": 0,
+          "y": 840
+        },
+        {
+          "x": 0,
+          "y": 520
+        }
+      ]
+    }
+  ],
+  "projects": {
+    "esp32s3cam1": {
+      "files": {
+        "sketch.ino": "const int BUZZER_CTRL=1;\nconst int STATUS_LED=21;\nconst int REAR_LED_CTRL=47;\nvoid setup(){pinMode(BUZZER_CTRL,OUTPUT);pinMode(STATUS_LED,OUTPUT);pinMode(REAR_LED_CTRL,OUTPUT);}\nvoid loop(){digitalWrite(BUZZER_CTRL,HIGH);digitalWrite(STATUS_LED,HIGH);digitalWrite(REAR_LED_CTRL,HIGH);delay(1000);digitalWrite(BUZZER_CTRL,LOW);digitalWrite(STATUS_LED,LOW);digitalWrite(REAR_LED_CTRL,LOW);delay(1000);}"
+      },
+      "main": "sketch.ino"
+    }
+  }
+}
